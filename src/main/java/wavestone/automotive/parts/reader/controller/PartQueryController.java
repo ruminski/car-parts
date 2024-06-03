@@ -1,6 +1,6 @@
 package wavestone.automotive.parts.reader.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import wavestone.automotive.parts.exception.PartNotFoundException;
@@ -11,15 +11,15 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/dealer/part")
+@AllArgsConstructor
 public class PartQueryController {
 
-    @Autowired
     private PartRepository repository;
 
     @GetMapping("/{id}")
     public Part findById(@PathVariable long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new PartNotFoundException());
+                .orElseThrow(() -> new PartNotFoundException("Failed to find part with id: " + id));
     }
 
     @GetMapping("/")
