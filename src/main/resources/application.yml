@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: car-parts
+  datasource:
+    url: jdbc:postgresql://localhost:5432/parts
+    username: user
+    password: secret
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+springdoc:
+  api-docs:
+    path: /v3/api-docs
