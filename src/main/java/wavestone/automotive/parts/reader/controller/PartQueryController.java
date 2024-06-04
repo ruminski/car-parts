@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import wavestone.automotive.parts.exception.PartNotFoundException;
-import wavestone.automotive.parts.reader.dao.PartRepository;
-import wavestone.automotive.parts.reader.entity.Part;
+import wavestone.automotive.parts.model.dao.PartRepository;
+import wavestone.automotive.parts.model.entity.Part;
 
 import java.util.Collection;
 

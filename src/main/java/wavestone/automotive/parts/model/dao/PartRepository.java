@@ -1,7 +1,7 @@
-package wavestone.automotive.parts.reader.dao;
+package wavestone.automotive.parts.model.dao;
 
 import org.springframework.data.repository.ListCrudRepository;
-import wavestone.automotive.parts.reader.entity.Part;
+import wavestone.automotive.parts.model.entity.Part;
 
 public interface PartRepository extends ListCrudRepository<Part, Long> {
 
