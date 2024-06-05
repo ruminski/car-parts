@@ -26,8 +26,8 @@ import java.util.Set;
 @Component
 public class DBTestDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
-    private static final String STEERING_WHEEL = "steering wheel";
-    private static final String STEERING_WHEELL_DESCRIPTION = "part of the steering system, located on the front axel";
+    public static final String STEERING_WHEEL = "steering wheel";
+    public static final String STEERING_WHEEL_DESCRIPTION = "part of the steering system, located on the front axel";
     private final PartRepository partRepository;
     private final ServiceCampaignRepository serviceCampaignRepository;
 
@@ -35,10 +35,10 @@ public class DBTestDataLoader implements ApplicationListener<ContextRefreshedEve
     public void onApplicationEvent(ContextRefreshedEvent event) {
         log.info("App initiated. Load example records into DB.");
         Part part1 = partRepository.save(Part.builder()
-                .brand("BMW")
+                .make("BMW")
                 .model("320i")
                 .name(STEERING_WHEEL)
-                .description(STEERING_WHEELL_DESCRIPTION)
+                .description(STEERING_WHEEL_DESCRIPTION)
                 .price(BigDecimal.valueOf(500.00))
                 .isAvailable(true)
                 .availableToShipInDays(2)
@@ -47,10 +47,10 @@ public class DBTestDataLoader implements ApplicationListener<ContextRefreshedEve
                 .build());
 
         Part part2 = partRepository.save(Part.builder()
-                .brand("BMW")
+                .make("BMW")
                 .model("320d")
                 .name(STEERING_WHEEL)
-                .description(STEERING_WHEELL_DESCRIPTION)
+                .description(STEERING_WHEEL_DESCRIPTION)
                 .price(BigDecimal.valueOf(500.00))
                 .isAvailable(true)
                 .availableToShipInDays(2)
@@ -59,10 +59,10 @@ public class DBTestDataLoader implements ApplicationListener<ContextRefreshedEve
                 .build());
 
         Part part3 = partRepository.save(Part.builder()
-                .brand("BMW")
+                .make("BMW")
                 .model("330i")
                 .name(STEERING_WHEEL)
-                .description(STEERING_WHEELL_DESCRIPTION)
+                .description(STEERING_WHEEL_DESCRIPTION)
                 .price(BigDecimal.valueOf(550.00))
                 .isAvailable(true)
                 .availableToShipInDays(3)
@@ -71,10 +71,10 @@ public class DBTestDataLoader implements ApplicationListener<ContextRefreshedEve
                 .build());
 
         Part part4 = partRepository.save(Part.builder()
-                .brand("BMW")
+                .make("BMW")
                 .model("330d")
                 .name(STEERING_WHEEL)
-                .description(STEERING_WHEELL_DESCRIPTION)
+                .description(STEERING_WHEEL_DESCRIPTION)
                 .price(BigDecimal.valueOf(550.00))
                 .isAvailable(false)
                 .producedFrom(LocalDate.of(2012, Month.JANUARY, 1))
@@ -88,7 +88,7 @@ public class DBTestDataLoader implements ApplicationListener<ContextRefreshedEve
                 .build());
 
         Part part5 = partRepository.save(Part.builder()
-                .brand("BMW")
+                .make("BMW")
                 .model("520d")
                 .name("exhaust pipe")
                 .description("part of the exhaust system, located in the rear axel")
@@ -100,7 +100,7 @@ public class DBTestDataLoader implements ApplicationListener<ContextRefreshedEve
                 .build());
 
         Part part6 = partRepository.save(Part.builder()
-                .brand("BMW")
+                .make("BMW")
                 .model("520i")
                 .name("exhaust pipe")
                 .description("part of the exhaust system, located in the rear axel")

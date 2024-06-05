@@ -10,6 +10,8 @@ import java.util.Set;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "service_campaigns")
 public class ServiceCampaign {

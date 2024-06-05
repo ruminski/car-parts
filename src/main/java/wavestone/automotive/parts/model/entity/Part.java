@@ -5,8 +5,10 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,6 +17,8 @@ import java.util.Set;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "parts")
 public class Part {
@@ -25,7 +29,7 @@ public class Part {
 
     @NotEmpty
     @Column(length = 30, nullable = false)
-    private String brand;
+    private String make;
 
     @NotEmpty
     @Column(length = 30, nullable = false)
