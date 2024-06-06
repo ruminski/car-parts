@@ -6,9 +6,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,23 +19,63 @@ public class ServiceCampaign {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
     private CampaignName campaignName;
 
     @NotNull
     @Column(nullable = false)
-    private LocalDate campaignStart;
+    private LocalDate startDate;
 
     @Nullable
-    private LocalDate campaignEnd;
-
+    private LocalDate endDate;
 
     @ManyToMany
     @JoinTable(name = "parts_in_campaigns",
             joinColumns = @JoinColumn(name = "campaign_id"),
             inverseJoinColumns = @JoinColumn(name = "part_id"))
-    private Set<Part> parts;
+    private Set<Part> parts = new HashSet<>();
 
+
+    public Set<Part> setParts(Set<Part> parts) {
+        this.parts.forEach(p -> removePart(p));
+        parts.forEach(this::addPart);
+        return parts;
+    }
+
+    public void addPart(Part part) {
+        this.parts.add(part);
+        part.getServiceCampaigns().add(this);
+    }
+
+    public void removePart(final Part part) {
+        if(part == null) return;
+        Part existingPart = this.parts.stream().filter(p -> p.getId().equals(part.getId())).findFirst().orElse(null);
+        if (existingPart != null) {
+            this.parts.remove(existingPart);
+            existingPart.getServiceCampaigns().remove(this);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static class ServiceCampaignBuilder {
+        private Set<Part> parts = new HashSet<>();
+
+        public ServiceCampaignBuilder parts(final Set<Part> parts) {
+            throw new UnsupportedOperationException("Use ServiceCampaign.setParts instead");
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ServiceCampaign)) return false;
+        return id != null && id.equals(((ServiceCampaign) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

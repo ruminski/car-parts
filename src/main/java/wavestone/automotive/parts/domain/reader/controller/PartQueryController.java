@@ -30,36 +30,18 @@ public class PartQueryController {
      */
     @PostMapping(value = "/{make}/{model}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<Part> findParts(@PathVariable String make, @PathVariable String model, @RequestBody PartFilter criteria) {
-        log.info("Find parts request");
         return service.findParts(make, model, criteria);
     }
 
     /**
      * Information on the availability and possible shipping date for parts with the given id.
      *
-     * @param id
-     * @return
+     * @param id Part ID
+     * @return matching Part
      */
     @GetMapping("/{id}")
     public Part findById(@PathVariable long id) {
         return service.findPartById(id);
     }
 
-    // CONTRIBUTOR BELOW
-
-    /**
-     * Information about all service actions for a given vehicle (make/model) conducted in the given date range.
-     * In addition to the above, the REST API should enable:
-     * a. changing the description of the part with the given id,
-     * b. adding a service action to the part with the given id,
-     *
-     * @param id
-     * @param book
-     * @return
-     */
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Part updatePart(@PathVariable("id") final String id, @RequestBody final Part book) {
-        return book;
-    }
 }

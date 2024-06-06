@@ -81,11 +81,12 @@ public class DBTestDataLoader implements ApplicationListener<ContextRefreshedEve
                 .producedTo(LocalDate.of(2018, Month.DECEMBER, 31))
                 .build());
 
-        serviceCampaignRepository.save(ServiceCampaign.builder()
+        ServiceCampaign serviceCampaign1 = ServiceCampaign.builder()
                 .campaignName(CampaignName.STEERING_SYSTEM_REPAIR)
-                .campaignStart(LocalDate.of(2018, Month.DECEMBER, 31))
-                .parts(Set.of(part1, part2, part3, part4))
-                .build());
+                .startDate(LocalDate.of(2018, Month.DECEMBER, 31))
+                .build();
+        serviceCampaign1.setParts(Set.of(part1, part2, part3, part4));
+        serviceCampaignRepository.save(serviceCampaign1);
 
         Part part5 = partRepository.save(Part.builder()
                 .make("BMW")
@@ -111,23 +112,25 @@ public class DBTestDataLoader implements ApplicationListener<ContextRefreshedEve
                 .producedTo(LocalDate.of(2018, Month.DECEMBER, 31))
                 .build());
 
-        serviceCampaignRepository.save(ServiceCampaign.builder()
+        ServiceCampaign serviceCampaign2 = ServiceCampaign.builder()
                 .campaignName(CampaignName.EXHAUST_SYSTEM_REPAIR)
-                .campaignStart(LocalDate.of(2016, Month.JANUARY, 31))
-                .parts(Set.of(part5, part6))
-                .build());
+                .startDate(LocalDate.of(2016, Month.JANUARY, 31))
+                .build();
+        serviceCampaign2.setParts(Set.of(part5, part6));
+        serviceCampaignRepository.save(serviceCampaign2);
 
         serviceCampaignRepository.save(ServiceCampaign.builder()
                 .campaignName(CampaignName.GEARBOX_SOFTWARE_UPGRADE)
-                .campaignStart(LocalDate.of(2014, Month.JULY, 31))
-                .parts(Set.of())
+                .startDate(LocalDate.of(2014, Month.JULY, 31))
                 .build());
 
-        serviceCampaignRepository.save(ServiceCampaign.builder()
+        ServiceCampaign serviceCampaign4 = ServiceCampaign.builder()
                 .campaignName(CampaignName.GENERAL_OVERVIEW_OF_PETROL_CARS)
-                .campaignStart(LocalDate.of(2016, Month.MARCH, 31))
-                .parts(Set.of(part1, part3, part6))
-                .build());
+                .startDate(LocalDate.of(2016, Month.MARCH, 31))
+                .endDate(LocalDate.of(2020, Month.MARCH, 31))
+                .build();
+        serviceCampaign4.setParts(Set.of(part1, part3, part6));
+        serviceCampaignRepository.save(serviceCampaign4);
 
         log.info("DB records successfully loaded.");
     }

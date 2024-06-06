@@ -5,17 +5,14 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,7 +22,7 @@ public class Part {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotEmpty
     @Column(length = 30, nullable = false)
@@ -62,7 +59,7 @@ public class Part {
 
     @ManyToMany(mappedBy = "parts")
     @JsonIgnore
-    private Set<ServiceCampaign> serviceCampaigns;
+    private Set<ServiceCampaign> serviceCampaigns = new HashSet<>();
 
 
     @SuppressWarnings("unused")
@@ -72,6 +69,18 @@ public class Part {
         public PartBuilder serviceCampaigns(final Set<ServiceCampaign> serviceCampaigns) {
             throw new UnsupportedOperationException("Use ServiceCampaign.setParts instead");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Part)) return false;
+        return id != null && id.equals(((Part) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 
 }
