@@ -14,7 +14,11 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "service_campaigns")
+@Table(name = "service_campaigns",
+        indexes = {
+                @Index(name = "start_date", columnList = "start_date"),
+                @Index(name = "end_date", columnList = "end_date")
+        })
 public class ServiceCampaign {
 
     @Id
@@ -39,7 +43,7 @@ public class ServiceCampaign {
 
 
     public Set<Part> setParts(Set<Part> parts) {
-        this.parts.forEach(p -> removePart(p));
+        this.parts.forEach(this::removePart);
         parts.forEach(this::addPart);
         return parts;
     }
@@ -60,7 +64,7 @@ public class ServiceCampaign {
 
     @SuppressWarnings("unused")
     public static class ServiceCampaignBuilder {
-        private Set<Part> parts = new HashSet<>();
+        private final Set<Part> parts = new HashSet<>();
 
         public ServiceCampaignBuilder parts(final Set<Part> parts) {
             throw new UnsupportedOperationException("Use ServiceCampaign.setParts instead");

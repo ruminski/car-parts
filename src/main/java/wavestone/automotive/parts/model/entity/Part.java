@@ -18,7 +18,9 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "parts")
+@Table(name = "parts", indexes = {
+        @Index(name = "make_and_model", columnList = "make, model")
+})
 public class Part {
 
     @Id
