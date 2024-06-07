@@ -3,6 +3,9 @@ package wavestone.automotive.parts.exception;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+/**
+ * Exception thrown when client error occurs.
+ */
 @Getter
 public class BusinessLogicException extends RuntimeException {
 
