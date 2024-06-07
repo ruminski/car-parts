@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import wavestone.automotive.parts.domain.dealer.controller.PartFilter;
-import wavestone.automotive.parts.exception.PartNotFoundException;
+import wavestone.automotive.parts.exception.ResourceNotFoundException;
 import wavestone.automotive.parts.model.dao.PartRepository;
 import wavestone.automotive.parts.model.dao.ServiceCampaignRepository;
 import wavestone.automotive.parts.model.entity.Part;
@@ -16,6 +16,9 @@ import java.util.Collection;
 @Service
 @AllArgsConstructor
 @Slf4j
+/**
+ * Service fetching from the DB. Read-only operations allowed.
+ */
 public class QueryService {
 
     private PartRepository partRepository;
@@ -35,10 +38,10 @@ public class QueryService {
         }
     }
 
-    public Part findPartById(long id) {
+    public Part findPartById(Long id) {
         log.info("Find part with id: {}", id);
         return partRepository.findById(id)
-                .orElseThrow(() -> new PartNotFoundException("Failed to find part with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Failed to find part with id: " + id));
     }
 
     public Collection<ServiceCampaign> findCampaignsWithinDataRange(String make, String model, LocalDate fromDate, LocalDate toDate) {

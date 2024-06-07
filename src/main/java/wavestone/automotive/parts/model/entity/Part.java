@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import wavestone.automotive.parts.exception.BusinessLogicException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -83,4 +84,10 @@ public class Part {
         return getClass().hashCode();
     }
 
+    public void setDescription(String description) {
+        if(description == null || description.isEmpty()) {
+            throw new BusinessLogicException("Description must not be null or empty.");
+        }
+        this.description = description;
+    }
 }

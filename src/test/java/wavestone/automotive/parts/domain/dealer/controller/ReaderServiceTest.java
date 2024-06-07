@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import wavestone.automotive.parts.TestCarPartsApplication;
 import wavestone.automotive.parts.domain.dealer.service.QueryService;
-import wavestone.automotive.parts.model.dao.ServiceCampaignRepository;
 import wavestone.automotive.parts.model.entity.Part;
 import wavestone.automotive.parts.model.entity.ServiceCampaign;
 
@@ -27,9 +26,6 @@ class ReaderServiceTest {
     @Autowired
     QueryService service;
 
-    @Autowired
-    ServiceCampaignRepository campaignRepository;
-
     @Transactional
     @Test
     @Order(1)
@@ -41,7 +37,7 @@ class ReaderServiceTest {
     @Test
     @Order(2)
     void findPartsWithNullOrEmptyCriteria() {
-        assertThat("to implement").isNotEmpty();
+        assertThat("to implement").isNotNull();
     }
 
     @Transactional

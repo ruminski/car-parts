@@ -14,6 +14,7 @@ import java.util.Collection;
 @RequestMapping("/api/dealer/service/campaign")
 @AllArgsConstructor
 @Slf4j
+@SuppressWarnings("unused")
 public class ServiceCampaignQueryController {
 
     private QueryService service;

@@ -13,6 +13,7 @@ import java.util.Collection;
 @RequestMapping("/api/dealer/part")
 @AllArgsConstructor
 @Slf4j
+@SuppressWarnings("unused")
 public class PartQueryController {
 
     private QueryService service;
@@ -38,7 +39,7 @@ public class PartQueryController {
      * @return matching Part
      */
     @GetMapping("/{id}")
-    public Part findById(@PathVariable long id) {
+    public Part findById(@PathVariable Long id) {
         return service.findPartById(id);
     }
 
