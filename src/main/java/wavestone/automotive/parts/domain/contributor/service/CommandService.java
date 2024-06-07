@@ -12,12 +12,12 @@ import wavestone.automotive.parts.model.entity.ServiceCampaign;
 
 import java.util.Optional;
 
-@Service
-@AllArgsConstructor
-@Slf4j
 /**
  * Service mutating DB
  */
+@Service
+@AllArgsConstructor
+@Slf4j
 public class CommandService {
 
     private PartRepository partRepository;

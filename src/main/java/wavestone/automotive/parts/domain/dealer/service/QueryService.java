@@ -13,12 +13,12 @@ import wavestone.automotive.parts.model.entity.ServiceCampaign;
 import java.time.LocalDate;
 import java.util.Collection;
 
-@Service
-@AllArgsConstructor
-@Slf4j
 /**
  * Service fetching from the DB. Read-only operations allowed.
  */
+@Service
+@AllArgsConstructor
+@Slf4j
 public class QueryService {
 
     private PartRepository partRepository;
