@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import wavestone.automotive.parts.domain.contributor.controller.ServiceCampaignCreate;
 import wavestone.automotive.parts.exception.ResourceNotFoundException;
 import wavestone.automotive.parts.model.dao.PartRepository;
 import wavestone.automotive.parts.model.dao.ServiceCampaignRepository;
@@ -44,17 +45,22 @@ public class CommandService {
     /**
      *
      * @param partId
-     * @param serviceCampaign
+     * @param serviceCampaignData
      * @return
      */
     @Transactional
-    public Part addServiceCampaignToPart(Long partId, ServiceCampaign serviceCampaign) {
+    public Part addServiceCampaignToPart(Long partId, ServiceCampaignCreate serviceCampaignData) {
         log.info("Add Service Campaign to Part with id: {}", partId);
         Optional<Part> byId = partRepository.findById(partId);
         if (byId.isEmpty()) {
             throw new ResourceNotFoundException("Failed to fetch part with id: " + partId);
         }
         Part part = byId.get();
+        ServiceCampaign serviceCampaign = ServiceCampaign.builder()
+                .campaignName(serviceCampaignData.campaignName())
+                .startDate(serviceCampaignData.startDate())
+                .endDate(serviceCampaignData.endDate())
+                .build();
         serviceCampaign.addPart(part);
         campaignRepository.save(serviceCampaign);
         return part;

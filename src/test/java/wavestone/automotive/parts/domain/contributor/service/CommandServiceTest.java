@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import wavestone.automotive.parts.TestCarPartsApplication;
+import wavestone.automotive.parts.domain.contributor.controller.ServiceCampaignCreate;
 import wavestone.automotive.parts.model.dao.PartRepository;
 import wavestone.automotive.parts.model.dao.ServiceCampaignRepository;
 import wavestone.automotive.parts.model.entity.CampaignName;
 import wavestone.automotive.parts.model.entity.Part;
-import wavestone.automotive.parts.model.entity.ServiceCampaign;
 
 
 import java.time.LocalDate;
@@ -61,10 +61,7 @@ class CommandServiceTest {
         assertThat(campaignRepository.findAll().stream()).hasSize(4);
 
         //when
-        ServiceCampaign campaign = ServiceCampaign.builder()
-                .campaignName(CampaignName.GENERAL_OVERVIEW_OF_PETROL_CARS)
-                .startDate(LocalDate.of(2024, Month.JULY, 31))
-                .build();
+        ServiceCampaignCreate campaign = new ServiceCampaignCreate(CampaignName.GENERAL_OVERVIEW_OF_PETROL_CARS, LocalDate.of(2024, Month.JULY, 31), null);
         Part part = service.addServiceCampaignToPart(2L, campaign);
         //then
         assertThat(part.getId()).isNotNull();
@@ -72,6 +69,5 @@ class CommandServiceTest {
         assertThat(campaignRepository.findAll().stream()).hasSize(5);
         Part updatedPart = partRepository.findById(2L).get();
         assertThat(updatedPart.getServiceCampaigns()).hasSize(2);
-        assertThat(updatedPart.getServiceCampaigns()).contains(campaign);
     }
 }

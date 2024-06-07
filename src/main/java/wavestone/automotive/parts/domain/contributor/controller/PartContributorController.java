@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import wavestone.automotive.parts.domain.contributor.service.CommandService;
 import wavestone.automotive.parts.exception.ErrorResponse;
 import wavestone.automotive.parts.model.entity.Part;
-import wavestone.automotive.parts.model.entity.ServiceCampaign;
 
 @Tag(name = "Contributor API", description = "Endpoints that allow data modifications")
 @RestController
@@ -59,7 +58,7 @@ public class PartContributorController {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Part.class))}),
             @ApiResponse(responseCode = "404", description = "Part not found", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))})})
     @PostMapping("/{id}/service/campaign")
-    public Part addServiceCampaign(@Parameter(description = "ID e.g. 1") @PathVariable final Long id, @RequestBody final ServiceCampaign serviceCampaign) {
+    public Part addServiceCampaign(@Parameter(description = "ID e.g. 1") @PathVariable final Long id, @RequestBody final ServiceCampaignCreate serviceCampaign) {
         Part part = service.addServiceCampaignToPart(id, serviceCampaign);
         log.info("Create Service Campaign: {}, and add Part with id: {}", part.getId(), serviceCampaign);
         return part;
