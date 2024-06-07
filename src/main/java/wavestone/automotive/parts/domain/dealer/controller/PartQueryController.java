@@ -1,6 +1,7 @@
 package wavestone.automotive.parts.domain.dealer.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -43,7 +44,9 @@ public class PartQueryController {
                     content = {@Content(mediaType = "application/json", array = @ArraySchema( schema = @Schema(implementation = Part.class)))}),
     })
     @PostMapping(value = "/{make}/{model}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<Part> findParts(@PathVariable String make, @PathVariable String model, @RequestBody PartFilter criteria) {
+    public Collection<Part> findParts(@Parameter(description = "car make e.g. BMW") @PathVariable String make,
+                                      @Parameter(description = "car model e.g. 320i") @PathVariable String model,
+                                      @RequestBody PartFilter criteria) {
         return service.findParts(make, model, criteria);
     }
 
@@ -59,7 +62,7 @@ public class PartQueryController {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Part.class))}),
             @ApiResponse(responseCode = "404", description = "Part not found", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))})})
     @GetMapping("/{id}")
-    public Part findById(@PathVariable Long id) {
+    public Part findById(@Parameter(description = "ID e.g. 1") @PathVariable Long id) {
         return service.findPartById(id);
     }
 

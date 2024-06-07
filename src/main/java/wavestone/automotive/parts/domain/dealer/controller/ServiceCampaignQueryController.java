@@ -1,6 +1,7 @@
 package wavestone.automotive.parts.domain.dealer.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -43,7 +44,10 @@ public class ServiceCampaignQueryController {
                     content = {@Content(mediaType = "application/json", array = @ArraySchema( schema = @Schema(implementation = ServiceCampaign.class)))}),
             @ApiResponse(responseCode = "404", description = "Part not found", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))})})
     @GetMapping(value = "/{make}/{model}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<ServiceCampaign> findParts(@PathVariable String make, @PathVariable String model, @RequestParam(required = false) LocalDate fromDate, @RequestParam(required = false) LocalDate toDate) {
+    public Collection<ServiceCampaign> findParts(@Parameter(description = "car make e.g. BMW") @PathVariable String make,
+                                                 @Parameter(description = "car model e.g. 320i") @PathVariable String model,
+                                                 @Parameter(description = "date in ISO format e.g. 2020-12-01") @RequestParam(required = false) LocalDate fromDate,
+                                                 @Parameter(description = "date in ISO format e.g. 2020-12-01") @RequestParam(required = false) LocalDate toDate) {
         return service.findCampaignsWithinDataRange(make, model, fromDate, toDate);
     }
 

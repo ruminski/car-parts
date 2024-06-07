@@ -1,6 +1,7 @@
 package wavestone.automotive.parts.domain.contributor.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -39,7 +40,7 @@ public class PartContributorController {
             @ApiResponse(responseCode = "404", description = "Part not found", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))})})
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Part updatePart(@PathVariable("id") final Long id, @RequestBody final PartUpdate partUpdate) {
+    public Part updatePart(@Parameter(description = "ID e.g. 1") @PathVariable("id") final Long id, @RequestBody final PartUpdate partUpdate) {
         Part part = service.updatePartDescription(id, partUpdate.partDescription());
         log.info("Set part description for partId: {}, description: {}", part.getId(), part.getDescription());
         return part;
@@ -58,7 +59,7 @@ public class PartContributorController {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Part.class))}),
             @ApiResponse(responseCode = "404", description = "Part not found", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))})})
     @PostMapping("/{id}/service/campaign")
-    public Part addServiceCampaign(@PathVariable final Long id, @RequestBody final ServiceCampaign serviceCampaign) {
+    public Part addServiceCampaign(@Parameter(description = "ID e.g. 1") @PathVariable final Long id, @RequestBody final ServiceCampaign serviceCampaign) {
         Part part = service.addServiceCampaignToPart(id, serviceCampaign);
         log.info("Create Service Campaign: {}, and add Part with id: {}", part.getId(), serviceCampaign);
         return part;
