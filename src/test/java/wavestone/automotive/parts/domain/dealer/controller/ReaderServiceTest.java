@@ -1,4 +1,4 @@
-package wavestone.automotive.parts.domain.reader.controller;
+package wavestone.automotive.parts.domain.dealer.controller;
 
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.MethodOrderer;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import wavestone.automotive.parts.TestCarPartsApplication;
-import wavestone.automotive.parts.domain.reader.service.ReaderService;
+import wavestone.automotive.parts.domain.dealer.service.QueryService;
 import wavestone.automotive.parts.model.dao.ServiceCampaignRepository;
 import wavestone.automotive.parts.model.entity.Part;
 import wavestone.automotive.parts.model.entity.ServiceCampaign;
@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.*;
 class ReaderServiceTest {
 
     @Autowired
-    ReaderService service;
+    QueryService service;
 
     @Autowired
     ServiceCampaignRepository campaignRepository;

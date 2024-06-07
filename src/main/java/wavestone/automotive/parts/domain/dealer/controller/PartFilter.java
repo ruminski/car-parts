@@ -1,4 +1,4 @@
-package wavestone.automotive.parts.domain.reader.controller;
+package wavestone.automotive.parts.domain.dealer.controller;
 
 import jakarta.validation.constraints.NotNull;
 

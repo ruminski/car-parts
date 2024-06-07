@@ -1,12 +1,10 @@
-package wavestone.automotive.parts.domain.reader.controller;
+package wavestone.automotive.parts.domain.dealer.controller;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import wavestone.automotive.parts.domain.reader.service.ReaderService;
+import wavestone.automotive.parts.domain.dealer.service.QueryService;
 import wavestone.automotive.parts.model.entity.Part;
 
 import java.util.Collection;
@@ -17,7 +15,7 @@ import java.util.Collection;
 @Slf4j
 public class PartQueryController {
 
-    private ReaderService service;
+    private QueryService service;
 
     /**
      * List of parts for a given car model and make, filtered by providing the name of the part

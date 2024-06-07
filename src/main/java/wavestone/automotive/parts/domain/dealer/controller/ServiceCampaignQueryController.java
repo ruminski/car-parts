@@ -1,12 +1,10 @@
-package wavestone.automotive.parts.domain.reader.controller;
+package wavestone.automotive.parts.domain.dealer.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import wavestone.automotive.parts.domain.reader.service.ReaderService;
-import wavestone.automotive.parts.model.entity.Part;
+import wavestone.automotive.parts.domain.dealer.service.QueryService;
 import wavestone.automotive.parts.model.entity.ServiceCampaign;
 
 import java.time.LocalDate;
@@ -18,7 +16,7 @@ import java.util.Collection;
 @Slf4j
 public class ServiceCampaignQueryController {
 
-    private ReaderService service;
+    private QueryService service;
 
     /**
      * Information about all service actions for a given vehicle (make/model) conducted in the given date range.
@@ -35,19 +33,4 @@ public class ServiceCampaignQueryController {
         return service.findCampaignsWithinDataRange(make, model, fromDate, toDate);
     }
 
-    // CONTRIBUTOR BELOW
-
-    /**
-     * a. changing the description of the part with the given id,
-     * b. adding a service action to the part with the given id,
-     *
-     * @param id
-     * @param book
-     * @return
-     */
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Part updatePart(@PathVariable("id") final String id, @RequestBody final Part book) {
-        return book;
-    }
 }

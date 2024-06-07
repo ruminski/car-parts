@@ -1,9 +1,9 @@
-package wavestone.automotive.parts.domain.reader.service;
+package wavestone.automotive.parts.domain.dealer.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import wavestone.automotive.parts.domain.reader.controller.PartFilter;
+import wavestone.automotive.parts.domain.dealer.controller.PartFilter;
 import wavestone.automotive.parts.exception.PartNotFoundException;
 import wavestone.automotive.parts.model.dao.PartRepository;
 import wavestone.automotive.parts.model.dao.ServiceCampaignRepository;
@@ -16,7 +16,7 @@ import java.util.Collection;
 @Service
 @AllArgsConstructor
 @Slf4j
-public class ReaderService {
+public class QueryService {
 
     private PartRepository partRepository;
     private ServiceCampaignRepository campaignRepository;
